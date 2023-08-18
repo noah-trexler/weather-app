@@ -1,6 +1,7 @@
-# Ui
+# weather-app
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3.
+33.7488,-84.3877
 
 ## Development server
 
