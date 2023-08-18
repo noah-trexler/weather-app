@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { simpleForecast } from 'src/app/shared/models/forecast.model';
+import {
+  dailyForecast,
+  simpleForecast,
+} from 'src/app/shared/models/forecast.model';
 import { WeatherService } from 'src/app/shared/services/weather-service.service';
 
 @Component({
@@ -10,17 +13,12 @@ import { WeatherService } from 'src/app/shared/services/weather-service.service'
 })
 export class WeatherDisplayComponent implements OnInit {
   @Input() coords: string = '33.7488,-84.3877';
-  forecast?: simpleForecast[];
+  forecast!: dailyForecast[];
   forecastSubscription!: Subscription;
 
   constructor(private weatherService: WeatherService) {}
 
   onSubmit() {
-    // const _input = this.coords.split(',');
-    // this.weatherService.getForecast(+_input[0], +_input[1]).subscribe((res) => {
-    //   console.log(res);
-    //   this.forecast = res;
-    // });
     this.weatherService.getForecastFromLocation();
   }
 
@@ -30,5 +28,6 @@ export class WeatherDisplayComponent implements OnInit {
         this.forecast = forecast;
       }
     );
+    this.weatherService.getForecastFromLocation();
   }
 }

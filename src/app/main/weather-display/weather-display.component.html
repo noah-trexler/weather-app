@@ -1,10 +1,10 @@
-<div>
+<!-- <main >
   <input type="text" [(ngModel)]="coords" />
   <button type="submit" (click)="onSubmit()">Send</button>
-</div>
+</main> -->
 
-<div class="panel-container">
-  <div *ngFor="let f of forecast">
+<div class="panel-container" *ngIf="forecast.length > 0">
+  <div class="center" *ngFor="let f of forecast">
     <app-weather-panel [forecast]="f"></app-weather-panel>
   </div>
 </div>
