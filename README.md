@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3.
 33.7488,-84.3877
 
-TODO: Add progress bar/loading screen. Accessibility best practices
+TODO: Add progress bar/loading screen. Accessibility best practices. Error handling. Express BFF.
 
 ## Development server
 

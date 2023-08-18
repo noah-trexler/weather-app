@@ -13,8 +13,11 @@ import { WeatherService } from 'src/app/shared/services/weather-service.service'
 })
 export class WeatherDisplayComponent implements OnInit {
   @Input() coords: string = '33.7488,-84.3877';
-  forecast!: dailyForecast[];
+  forecast: dailyForecast[] = [];
   forecastSubscription!: Subscription;
+
+  location: { city: string; state: string } | null = null;
+  locationSubscription!: Subscription;
 
   constructor(private weatherService: WeatherService) {}
 
@@ -26,6 +29,12 @@ export class WeatherDisplayComponent implements OnInit {
     this.forecastSubscription = this.weatherService.forecastData.subscribe(
       (forecast) => {
         this.forecast = forecast;
+      }
+    );
+
+    this.locationSubscription = this.weatherService.locationData.subscribe(
+      (location) => {
+        this.location = location;
       }
     );
     this.weatherService.getForecastFromLocation();

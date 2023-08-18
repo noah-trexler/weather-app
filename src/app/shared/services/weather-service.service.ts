@@ -12,6 +12,7 @@ import {
 })
 export class WeatherService {
   forecastData = new Subject<dailyForecast[]>();
+  locationData = new Subject<{ city: string; state: string }>();
 
   constructor(private http: HttpClient) {}
 
@@ -22,6 +23,9 @@ export class WeatherService {
           position.coords.latitude,
           position.coords.longitude
         ).subscribe((res) => this.forecastData.next(res));
+      },
+      (error) => {
+        console.log('Error retrieving data. ' + error);
       }
     );
   }
@@ -29,15 +33,21 @@ export class WeatherService {
   getForecast(latitude: number, longitude: number) {
     // Atlanta 33.7488,-84.3877
     return this.http
-      .get<{ properties: { forecast: string }; else: any }>(
-        `https://api.weather.gov/points/${latitude},${longitude}`
-      )
+      .get<{
+        properties: {
+          relativeLocation: { properties: { city: string; state: string } };
+          forecast: string;
+        };
+      }>(`https://api.weather.gov/points/${latitude},${longitude}`)
       .pipe(
-        switchMap((responseData) =>
-          this.http.get<{ properties: { else: any; periods: forecast[] } }>(
+        switchMap((responseData) => {
+          this.locationData.next(
+            responseData.properties.relativeLocation.properties
+          );
+          return this.http.get<{ properties: { periods: forecast[] } }>(
             responseData.properties.forecast
-          )
-        )
+          );
+        })
       )
       .pipe(
         map((responseData) => {
@@ -54,17 +64,6 @@ export class WeatherService {
             forecast.push(_data);
           }
           return forecast;
-          // const forecasts: simpleForecast[] = [];
-          // for (let f of responseData.properties.periods) {
-          //   let _data: simpleForecast = {
-          //     isDaytime: f.isDaytime,
-          //     temp: f.temperature,
-          //     humidity: f.relativeHumidity.value,
-          //     precip: f.probabilityOfPrecipitation.value,
-          //   };
-          //   forecasts.push(_data);
-          // }
-          // return forecasts;
         })
       );
   }
