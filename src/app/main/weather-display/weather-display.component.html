@@ -1,5 +1,10 @@
 <div>
-  <input type="text" #coords />
-  <button type="submit" (click)="onSubmit(coords.value)">Send</button>
-  <!-- <textarea [(ngModel)]="forecast"></textarea> -->
+  <input type="text" [(ngModel)]="coords" />
+  <button type="submit" (click)="onSubmit()">Send</button>
+</div>
+
+<div class="panel-container">
+  <div *ngFor="let f of forecast">
+    <app-weather-panel [forecast]="f"></app-weather-panel>
+  </div>
 </div>
