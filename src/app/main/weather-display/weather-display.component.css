@@ -1,0 +1,29 @@
+.panel-container {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-auto-flow: column;
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+}
+
+/* .div1 {
+  grid-area: 1 / 1 / 3 / 2;
+}
+.div2 {
+  grid-area: 1 / 2 / 3 / 3;
+}
+.div3 {
+  grid-area: 1 / 3 / 3 / 4;
+}
+.div4 {
+  grid-area: 1 / 4 / 3 / 5;
+}
+.div5 {
+  grid-area: 1 / 5 / 3 / 6;
+}
+.div6 {
+  grid-area: 1 / 6 / 3 / 7;
+}
+.div7 {
+  grid-area: 1 / 7 / 3 / 8;
+} */
