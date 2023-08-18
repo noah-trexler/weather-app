@@ -1,5 +1,6 @@
 <div class="weather-panel">
-  <h3>Temperature: {{ forecast.temp }} °F</h3>
+  <h2>{{ forecast.name }}</h2>
+  <h3>Hi {{ forecast.hi_temp }} °F, Lo {{ forecast.lo_temp }}</h3>
   <p>Humidity: {{ forecast.humidity }} %</p>
-  <p>Precipitation: {{ forecast.precip }}</p>
+  <p>% Rain: {{ forecast.precip }}</p>
 </div>

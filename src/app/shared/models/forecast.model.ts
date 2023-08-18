@@ -32,3 +32,11 @@ export interface simpleForecast {
   humidity: number;
   precip: number;
 }
+
+export interface dailyForecast {
+  name: string;
+  hi_temp: number;
+  lo_temp: number;
+  humidity: number;
+  precip: number;
+}
