@@ -1,8 +1,5 @@
 import { Component, Input } from '@angular/core';
-import {
-  dailyForecast,
-  simpleForecast,
-} from 'src/app/shared/models/forecast.model';
+import { dailyForecast } from 'src/app/shared/models/forecast.model';
 
 @Component({
   selector: 'app-weather-panel',

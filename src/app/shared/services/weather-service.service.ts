@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject, map, switchMap } from 'rxjs';
-import {
-  dailyForecast,
-  forecast,
-  simpleForecast,
-} from '../models/forecast.model';
+import { dailyForecast, forecast } from '../models/forecast.model';
 
 @Injectable({
   providedIn: 'root',
@@ -52,9 +48,9 @@ export class WeatherService {
       .pipe(
         map((responseData) => {
           const forecast: dailyForecast[] = [];
-          let f = responseData.properties.periods;
+          const f = responseData.properties.periods;
           for (let i = 0; i < f.length; i += 2) {
-            let _data: dailyForecast = {
+            const _data: dailyForecast = {
               name: f[i].name,
               hi_temp: f[i].temperature,
               lo_temp: f[i + 1].temperature,
