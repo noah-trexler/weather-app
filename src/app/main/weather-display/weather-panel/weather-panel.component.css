@@ -1,2 +1,6 @@
 .weather-panel {
+  text-align: center;
+}
+h2 {
+  font-size: 1.25em;
 }
