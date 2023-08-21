@@ -11,9 +11,10 @@
     Weekly forecast for <em>{{ location.city }}, {{ location.state }}:</em>
   </h3>
 
-  <div class="panel-container" *ngIf="forecast.length > 0">
-    <div class="center" *ngFor="let f of forecast">
-      <app-weather-panel [forecast]="f"></app-weather-panel>
-    </div>
-  </div>
+  <section class="center panel-container" *ngIf="forecast.length > 0">
+    <app-weather-panel
+      *ngFor="let f of forecast"
+      [forecast]="f"
+    ></app-weather-panel>
+  </section>
 </main>
