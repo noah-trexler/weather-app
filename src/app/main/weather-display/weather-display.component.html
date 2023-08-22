@@ -2,6 +2,10 @@
   <!-- <input type="text" [(ngModel)]="coords" />
   <button type="submit" (click)="onSubmit()">Send</button> -->
 
+  <div class="error" *ngIf="error !== ''">
+    <p>There was an error processing your request: {{ error }}</p>
+  </div>
+
   <div *ngIf="loading" class="loading-bar">
     <p><em>Loading weather data...</em></p>
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
@@ -16,5 +20,14 @@
       *ngFor="let f of forecast"
       [forecast]="f"
     ></app-weather-panel>
+  </section>
+
+  <section
+    class="location-error"
+    *ngIf="forecast.length === 0 && !this.loading"
+  >
+    <app-location-display
+      (loadingGeocode)="loading = true"
+    ></app-location-display>
   </section>
 </main>

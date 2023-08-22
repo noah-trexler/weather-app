@@ -1,29 +1,43 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject, map, switchMap } from 'rxjs';
+import { Subject, catchError, map, switchMap, throwError } from 'rxjs';
 import { dailyForecast, forecast } from '../models/forecast.model';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WeatherService {
-  forecastData = new Subject<dailyForecast[]>();
+  forecastData = new Subject<dailyForecast[] | null>();
   locationData = new Subject<{ city: string; state: string }>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private errorService: ErrorService) {}
 
-  getForecastFromLocation() {
-    navigator.geolocation.getCurrentPosition(
-      (position: GeolocationPosition) => {
-        this.getForecast(
-          position.coords.latitude,
-          position.coords.longitude
-        ).subscribe((res) => this.forecastData.next(res));
-      },
-      (error) => {
-        console.log('Error retrieving data. ' + error);
-      }
-    );
+  getForecastFromLocation(coords?: { lat: number; lon: number }) {
+    if (coords) {
+      this.getForecast(coords.lat, coords.lon).subscribe({
+        next: (v) => this.forecastData.next(v),
+        error: (e) => console.log(e),
+      });
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        (position: GeolocationPosition) => {
+          this.getForecast(
+            position.coords.latitude,
+            position.coords.longitude
+          ).subscribe({
+            next: (v) => this.forecastData.next(v),
+            error: (e) => this.errorService.emitError(e),
+          });
+        },
+        (error) => {
+          this.errorService.emitError(
+            'Unable to retrieve location data. ' + error
+          );
+          this.forecastData.next(null);
+        }
+      );
+    }
   }
 
   getForecast(latitude: number, longitude: number) {
@@ -60,6 +74,9 @@ export class WeatherService {
             forecast.push(_data);
           }
           return forecast;
+        }),
+        catchError((err) => {
+          return throwError(() => new Error(err));
         })
       );
   }

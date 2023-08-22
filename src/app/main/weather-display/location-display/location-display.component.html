@@ -1,0 +1,13 @@
+<p>Unable to find your location. Enter an address or location instead:</p>
+
+<form (ngSubmit)="onSubmit(address.value)" #form="ngForm">
+  <label for="address">Location: </label>
+  <input
+    type="text"
+    name="address"
+    placeholder="Atlanta, GA"
+    required
+    #address
+  />
+  <button type="submit" [disabled]="!form.form.valid">Submit</button>
+</form>

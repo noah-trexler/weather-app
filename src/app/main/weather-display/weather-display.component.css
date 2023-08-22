@@ -31,3 +31,7 @@ app-weather-panel {
   margin: 5px;
   padding: 5px;
 }
+
+.error > p {
+  border: 1px dashed red;
+}
