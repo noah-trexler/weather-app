@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Subject, catchError, map, switchMap, throwError } from 'rxjs';
+import { Subject, catchError, map, throwError } from 'rxjs';
 import { dailyForecast, forecast } from '../models/forecast.model';
 import { ErrorService } from './error.service';
 

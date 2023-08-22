@@ -26,27 +26,15 @@ export class GeocodeService {
   // geoapify
   geocode(address: string) {
     this.http
-      .get<{ features: geocodeData[] }>(
-        'https://api.geoapify.com/v1/geocode/search',
-        {
-          params: new HttpParams({
-            fromObject: {
-              text: address,
-              apiKey: '34bd87f959a0421bba9cbf37ca106a02',
-            },
-          }),
-        }
-      )
+      .get<{ lat: number; lon: number }>('http://localhost:3000/geocode', {
+        params: new HttpParams({ fromObject: { text: address } }),
+      })
       .subscribe({
         next: (resData) => {
-          resData.features.length > 0
-            ? this.weatherService.getForecastFromLocation({
-                lat: resData.features[0].properties.lat,
-                lon: resData.features[0].properties.lon,
-              })
-            : this.errorService.emitError(
-                'could not interpret location data response.'
-              );
+          this.weatherService.getForecastFromLocation({
+            lat: resData.lat,
+            lon: resData.lon,
+          });
         },
         error: (e) => {
           this.errorService.emitError(e);
