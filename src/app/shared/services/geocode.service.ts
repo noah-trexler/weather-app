@@ -3,16 +3,6 @@ import { Injectable } from '@angular/core';
 import { WeatherService } from './weather-service.service';
 import { ErrorService } from './error.service';
 
-interface geocodeData {
-  bbox: number[];
-  geometry: unknown;
-  properties: {
-    lat: number;
-    lon: number;
-  };
-  type: string;
-}
-
 @Injectable({
   providedIn: 'root',
 })
