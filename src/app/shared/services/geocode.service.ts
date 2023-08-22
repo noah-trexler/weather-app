@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { WeatherService } from './weather-service.service';
-import { throwError } from 'rxjs';
 import { ErrorService } from './error.service';
 
 interface geocodeData {
