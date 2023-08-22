@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Subject, catchError, map, switchMap, throwError } from 'rxjs';
 import { dailyForecast, forecast } from '../models/forecast.model';
 import { ErrorService } from './error.service';
@@ -45,25 +45,22 @@ export class WeatherService {
     // Atlanta 33.7488,-84.3877
     return this.http
       .get<{
-        properties: {
-          relativeLocation: { properties: { city: string; state: string } };
-          forecast: string;
+        message: string;
+        locationData: {
+          city: string;
+          state: string;
         };
-      }>(`https://api.weather.gov/points/${latitude},${longitude}`)
-      .pipe(
-        switchMap((responseData) => {
-          this.locationData.next(
-            responseData.properties.relativeLocation.properties
-          );
-          return this.http.get<{ properties: { periods: forecast[] } }>(
-            responseData.properties.forecast
-          );
-        })
-      )
+        forecastData: forecast[];
+      }>('http://localhost:3000/forecast', {
+        params: new HttpParams({
+          fromObject: { lat: latitude, lon: longitude },
+        }),
+      })
       .pipe(
         map((responseData) => {
+          this.locationData.next(responseData.locationData);
           const forecast: dailyForecast[] = [];
-          const f = responseData.properties.periods;
+          const f = responseData.forecastData;
           for (let i = 0; i < f.length; i += 2) {
             const _data: dailyForecast = {
               name: f[i].name,
