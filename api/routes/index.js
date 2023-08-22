@@ -17,7 +17,7 @@ router.get("/forecast", function (req, res, next) {
       res.status(200).json({
         message: "Successfully retrieved forecast data",
         locationData: location,
-        forecastData: responseData,
+        forecastData: responseData.properties.periods,
       });
     })
     .catch((err) => console.error(err));
