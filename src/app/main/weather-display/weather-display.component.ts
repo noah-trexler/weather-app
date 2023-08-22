@@ -29,6 +29,7 @@ export class WeatherDisplayComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.errorSubscription = this.errorService.error.subscribe((err) => {
       this.error = err;
+      this.loading = false;
     });
     this.forecastSubscription = this.weatherService.forecastData.subscribe(
       (forecast) => {

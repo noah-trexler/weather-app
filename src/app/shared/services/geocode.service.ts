@@ -43,7 +43,7 @@ export class GeocodeService {
           resData.features.length > 0
             ? this.weatherService.getForecastFromLocation({
                 lat: resData.features[0].properties.lat,
-                lon: resData.features[0].properties.lat,
+                lon: resData.features[0].properties.lon,
               })
             : this.errorService.emitError(
                 'could not interpret location data response.'

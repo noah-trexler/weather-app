@@ -17,7 +17,7 @@ export class WeatherService {
     if (coords) {
       this.getForecast(coords.lat, coords.lon).subscribe({
         next: (v) => this.forecastData.next(v),
-        error: (e) => console.log(e),
+        error: (e) => this.errorService.emitError(e),
       });
     } else {
       navigator.geolocation.getCurrentPosition(
@@ -31,10 +31,11 @@ export class WeatherService {
           });
         },
         (error) => {
-          this.errorService.emitError(
-            'Unable to retrieve location data. ' + error
-          );
-          this.forecastData.next(null);
+          error.POSITION_UNAVAILABLE
+            ? this.forecastData.next(null)
+            : this.errorService.emitError(
+                'Unable to retrieve location data. ' + error
+              );
         }
       );
     }
