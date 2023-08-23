@@ -3,16 +3,6 @@ import { Injectable } from '@angular/core';
 import { WeatherService } from './weather-service.service';
 import { ErrorService } from './error.service';
 
-interface geocodeData {
-  bbox: number[];
-  geometry: unknown;
-  properties: {
-    lat: number;
-    lon: number;
-  };
-  type: string;
-}
-
 @Injectable({
   providedIn: 'root',
 })
@@ -26,27 +16,18 @@ export class GeocodeService {
   // geoapify
   geocode(address: string) {
     this.http
-      .get<{ features: geocodeData[] }>(
-        'https://api.geoapify.com/v1/geocode/search',
+      .get<{ lat: number; lon: number }>(
+        'https://weather-app-api-235x.onrender.com/geocode',
         {
-          params: new HttpParams({
-            fromObject: {
-              text: address,
-              apiKey: '34bd87f959a0421bba9cbf37ca106a02',
-            },
-          }),
+          params: new HttpParams({ fromObject: { text: address } }),
         }
       )
       .subscribe({
         next: (resData) => {
-          resData.features.length > 0
-            ? this.weatherService.getForecastFromLocation({
-                lat: resData.features[0].properties.lat,
-                lon: resData.features[0].properties.lon,
-              })
-            : this.errorService.emitError(
-                'could not interpret location data response.'
-              );
+          this.weatherService.getForecastFromLocation({
+            lat: resData.lat,
+            lon: resData.lon,
+          });
         },
         error: (e) => {
           this.errorService.emitError(e);
