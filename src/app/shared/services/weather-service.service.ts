@@ -51,7 +51,7 @@ export class WeatherService {
           state: string;
         };
         forecastData: forecast[];
-      }>('http://localhost:3000/forecast', {
+      }>('https://weather-app-api-235x.onrender.com/forecast', {
         params: new HttpParams({
           fromObject: { lat: latitude, lon: longitude },
         }),

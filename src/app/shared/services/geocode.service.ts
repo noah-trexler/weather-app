@@ -16,9 +16,12 @@ export class GeocodeService {
   // geoapify
   geocode(address: string) {
     this.http
-      .get<{ lat: number; lon: number }>('http://localhost:3000/geocode', {
-        params: new HttpParams({ fromObject: { text: address } }),
-      })
+      .get<{ lat: number; lon: number }>(
+        'https://weather-app-api-235x.onrender.com/geocode',
+        {
+          params: new HttpParams({ fromObject: { text: address } }),
+        }
+      )
       .subscribe({
         next: (resData) => {
           this.weatherService.getForecastFromLocation({
