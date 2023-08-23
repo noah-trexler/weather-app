@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "baseHref": "https://noah-trexler.github.io/weather-app",
+            "baseHref": "https://noah-trexler.github.io/weather-app/",
             "outputPath": "dist/weather-app",
             "index": "src/index.html",
             "main": "src/main.ts",
