@@ -5,6 +5,12 @@ var got = require("got");
 require("dotenv").config();
 
 /* GET forecast. */
+router.get("/", function (req, res, next) {
+  res.status(404).json({
+    message: "Unsuccessful request",
+  });
+});
+
 router.get("/forecast", function (req, res, next) {
   var location = "";
   got(`https://api.weather.gov/points/${req.query.lat},${req.query.lon}`)
