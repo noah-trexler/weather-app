@@ -26,7 +26,12 @@ router.get("/forecast", function (req, res, next) {
         forecastData: responseData.properties.periods,
       });
     })
-    .catch((err) => console.error(err));
+    .catch((err) => {
+      res.status(500).json({
+        message: "Unknown server error",
+        error: err,
+      });
+    });
 });
 
 router.get("/geocode", function (req, res, next) {
@@ -47,7 +52,12 @@ router.get("/geocode", function (req, res, next) {
         });
       }
     })
-    .catch(console.error);
+    .catch((err) => {
+      res.status(500).json({
+        message: "Unknown server error",
+        error: err,
+      });
+    });
 });
 
 module.exports = router;
