@@ -1,33 +1,31 @@
 <main>
-  <!-- <input type="text" [(ngModel)]="coords" />
-  <button type="submit" (click)="onSubmit()">Send</button> -->
-
   <div class="error" *ngIf="error !== ''">
-    <p>There was an error processing your request: {{ error }}</p>
+    <p>{{ error }}</p>
   </div>
 
-  <div *ngIf="loading" class="loading-bar">
+  <div class="loading-bar" *ngIf="loading">
     <p><em>Loading weather data...</em></p>
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
 
-  <h3 *ngIf="location !== null">
-    Weekly forecast for <em>{{ location.city }}, {{ location.state }}:</em>
-  </h3>
+  <div class="user-location">
+    <h3 *ngIf="location !== null">
+      Weekly forecast for <em>{{ location.city }}, {{ location.state }}:</em>
+    </h3>
 
-  <section class="center panel-container" *ngIf="forecast.length > 0">
-    <app-weather-panel
-      *ngFor="let f of forecast"
-      [forecast]="f"
-    ></app-weather-panel>
-  </section>
+    <section class="center panel-container" *ngIf="forecast.length > 0">
+      <app-weather-panel
+        *ngFor="let f of forecast"
+        [forecast]="f"
+      ></app-weather-panel>
+    </section>
+  </div>
 
-  <section
-    class="location-error"
-    *ngIf="forecast.length === 0 && !this.loading"
-  >
-    <app-location-display
-      (loadingGeocode)="loading = true"
-    ></app-location-display>
-  </section>
+  <div class="no-user-location">
+    <section *ngIf="forecast.length === 0 && !this.loading">
+      <app-location-display
+        (loadingGeocode)="loading = true"
+      ></app-location-display>
+    </section>
+  </div>
 </main>

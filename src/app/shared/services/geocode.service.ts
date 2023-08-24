@@ -30,7 +30,7 @@ export class GeocodeService {
           });
         },
         error: (e) => {
-          this.errorService.emitError(e);
+          this.errorService.emitError(e.error.message);
         },
       });
   }

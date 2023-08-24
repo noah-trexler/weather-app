@@ -9,13 +9,15 @@ import { GeocodeService } from 'src/app/shared/services/geocode.service';
 })
 export class LocationDisplayComponent {
   @Output() loadingGeocode = new EventEmitter<boolean>();
+  addr = '';
   constructor(
     private geocodeService: GeocodeService,
     private errorService: ErrorService
   ) {}
-  onSubmit(address: string) {
+  onSubmit() {
+    if (this.addr === '') return;
     this.loadingGeocode.emit(true);
-    this.errorService.emitError('');
-    this.geocodeService.geocode(address);
+    // this.errorService.emitError('');
+    this.geocodeService.geocode(this.addr);
   }
 }
