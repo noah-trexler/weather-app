@@ -17,7 +17,8 @@ export class WeatherService {
     if (coords) {
       this.getForecast(coords.lat, coords.lon).subscribe({
         next: (v) => this.forecastData.next(v),
-        error: (e) => this.errorService.emitError(e.error.message),
+        error: (e) =>
+          this.errorService.emitError('Unable to process forecast data.'),
       });
     } else {
       navigator.geolocation.getCurrentPosition(
@@ -27,7 +28,8 @@ export class WeatherService {
             position.coords.longitude
           ).subscribe({
             next: (v) => this.forecastData.next(v),
-            error: (e) => this.errorService.emitError(e.error.message),
+            error: (e) =>
+              this.errorService.emitError('Unable to process forecast data.'),
           });
         },
         (error) => {

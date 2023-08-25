@@ -30,7 +30,7 @@ export class GeocodeService {
           });
         },
         error: (e) => {
-          this.errorService.emitError(e.error.message);
+          this.errorService.emitError('Unable to interpret geocode data.');
         },
       });
   }
