@@ -5,9 +5,22 @@ main {
   margin-right: auto;
 }
 
-h3 {
+.panel-title {
+  position: relative;
+  background-color: rgba(211, 211, 211, 0.192);
+  border-radius: 3px;
+}
+
+.panel-title h3 {
   font-family: sans-serif;
   padding: 5px;
+  padding-left: 25px;
+}
+
+.panel-title button {
+  position: absolute;
+  top: 5px;
+  right: 25px;
 }
 
 .panel-container {

@@ -25,6 +25,14 @@ export class WeatherDisplayComponent implements OnInit, OnDestroy {
     private errorService: ErrorService
   ) {}
 
+  onReset() {
+    this.location = null;
+    this.error = '';
+    this.forecast = [];
+    this.loading = true;
+    this.weatherService.getForecastFromLocation();
+  }
+
   ngOnInit(): void {
     this.loading = true;
     this.errorSubscription = this.errorService.error.subscribe((err) => {
@@ -35,6 +43,7 @@ export class WeatherDisplayComponent implements OnInit, OnDestroy {
       (forecast) => {
         if (forecast) {
           this.forecast = forecast;
+          this.error = '';
         }
         this.loading = false;
       }
@@ -44,6 +53,7 @@ export class WeatherDisplayComponent implements OnInit, OnDestroy {
       (location) => {
         this.location = location;
         this.loading = false;
+        this.error = '';
       }
     );
     this.weatherService.getForecastFromLocation();

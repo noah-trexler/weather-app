@@ -9,9 +9,13 @@
   </div>
 
   <div class="user-location">
-    <h3 *ngIf="location !== null">
-      Weekly forecast for <em>{{ location.city }}, {{ location.state }}:</em>
-    </h3>
+    <div class="panel-title" *ngIf="location !== null">
+      <h3>
+        Weekly forecast for
+        <em>{{ location.city }}, {{ location.state }}:</em>
+      </h3>
+      <button (click)="onReset()">Reset</button>
+    </div>
 
     <section class="center panel-container" *ngIf="forecast.length > 0">
       <app-weather-panel
