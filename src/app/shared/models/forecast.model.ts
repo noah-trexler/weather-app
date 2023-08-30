@@ -39,4 +39,5 @@ export interface dailyForecast {
   lo_temp: number;
   humidity: number;
   precip: number;
+  icon: string;
 }

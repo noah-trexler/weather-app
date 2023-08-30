@@ -4,3 +4,7 @@
 h2 {
   font-size: 1.25em;
 }
+img {
+  border-radius: 3px;
+  opacity: 0.75;
+}

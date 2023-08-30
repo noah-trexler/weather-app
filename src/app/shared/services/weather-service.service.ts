@@ -70,6 +70,7 @@ export class WeatherService {
               lo_temp: f[i + 1].temperature,
               humidity: f[i].relativeHumidity.value,
               precip: f[i].probabilityOfPrecipitation.value,
+              icon: f[i].icon,
             };
             forecast.push(_data);
           }
