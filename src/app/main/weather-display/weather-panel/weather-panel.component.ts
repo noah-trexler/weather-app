@@ -8,4 +8,7 @@ import { dailyForecast } from 'src/app/shared/models/forecast.model';
 })
 export class WeatherPanelComponent {
   @Input() forecast!: dailyForecast;
+  onClick() {
+    console.log('clicked');
+  }
 }

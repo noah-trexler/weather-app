@@ -10,4 +10,5 @@
   </p>
   <p>{{ forecast.precip === null ? 0 : forecast.precip }}% Chance Rain</p>
   <img src="{{ forecast.icon }}" alt="" />
+  <button (click)="onClick()" class="clickable">Forecast</button>
 </section>
