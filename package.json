@@ -7,9 +7,9 @@
     "start:server": "node index.ts",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:ci": "jest --runInBand",
+    "test": "ng test",
+    "e2e": "npx playwright test",
+    "e2e:debug": "PWDEBUG=1 npx playwright test --headed",
     "lint": "ng lint"
   },
   "private": true,
