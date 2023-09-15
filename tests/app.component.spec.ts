@@ -21,8 +21,9 @@ test.describe('app loaded', () => {
     context,
   }) => {
     // Page loads => no geolocation => displays location prompt
-    await page.goto(URL);
     await context.clearPermissions();
+    await page.goto(URL);
+
     await expect(page.getByText('Unable')).toBeVisible();
   });
 });

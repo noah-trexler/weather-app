@@ -17,7 +17,7 @@ export class WeatherService {
     if (coords) {
       this.getForecast(coords.lat, coords.lon).subscribe({
         next: (v) => this.forecastData.next(v),
-        error: (e) =>
+        error: () =>
           this.errorService.emitError('Unable to process forecast data.'),
       });
     } else {
@@ -28,7 +28,7 @@ export class WeatherService {
             position.coords.longitude
           ).subscribe({
             next: (v) => this.forecastData.next(v),
-            error: (e) =>
+            error: () =>
               this.errorService.emitError('Unable to process forecast data.'),
           });
         },
