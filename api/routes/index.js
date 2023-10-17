@@ -60,4 +60,29 @@ router.get("/geocode", function (req, res, next) {
     });
 });
 
+router.post(
+  "/minuteclinic/visit-manager/api/appointment/v2/eligibility",
+  (req, res) => {
+    res.status(200).json({
+      statusDescription: "Success",
+      statusCode: "0000",
+      subject: "LmxPbyBw",
+      details: {
+        confirmationNumber: "2G4LDD5",
+        appointmentDateTime: "10/17/2023 13:30:00",
+        firstName: "Bill",
+        lastName: "Wen",
+        reasonForVisit: "Illness/Injury",
+        clinicId: "158",
+        address1: "323 CROMWELL AVENUE, CORNER OF NEW BRITAIN AVENUE",
+        city: "ROCKY HILL",
+        state: "CT",
+        zipCode: "06067",
+        email: "noah.trexler@cvshealth.com",
+        phoneNumber: "3332221111",
+      },
+    });
+  }
+);
+
 module.exports = router;
